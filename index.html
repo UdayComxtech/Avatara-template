@@ -1,19 +1,691 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>My static Space</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="card">
-			<h1>Welcome to your static Space!</h1>
-			<p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-			<p>
-				Also don't forget to check the
-				<a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spaces documentation</a>.
-			</p>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Traffic - Premium Traffic Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for advanced effects */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .blob {
+            filter: blur(40px);
+            opacity: 0.3;
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .stats-counter {
+            transition: all 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-white/80 backdrop-blur-md z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold gradient-text">House Traffic</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium transition">Home</a>
+                    <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium transition">Services</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition">About</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-indigo-600 font-medium transition">Pricing</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium transition">Contact</a>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-full font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">Get Started</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-indigo-600 focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full px-4 pb-4">
+            <div class="flex flex-col space-y-3 pt-2">
+                <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100">Home</a>
+                <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100">Services</a>
+                <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100">About</a>
+                <a href="#pricing" class="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100">Pricing</a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100">Contact</a>
+                <a href="#contact" class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-full font-medium text-center mt-2">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="parallax min-h-screen flex items-center justify-center pt-20" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center py-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Premium <span class="gradient-text">Traffic</span> Solutions</h1>
+            <p class="text-xl text-gray-200 max-w-3xl mx-auto mb-10">Boost your online presence with our high-quality targeted traffic. We deliver real visitors that convert into customers and sales.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-full font-bold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">Start Growing Now</a>
+                <a href="#services" class="px-8 py-4 bg-white/10 text-white border-2 border-white/30 rounded-full font-bold text-lg backdrop-blur-md hover:bg-white/20 transition">Learn More</a>
+            </div>
+        </div>
+        
+        <!-- Animated blobs in background -->
+        <div class="absolute w-full h-full inset-0 overflow-hidden z-0">
+            <div class="blob bg-indigo-500 w-96 h-96 rounded-full top-1/4 -left-40"></div>
+            <div class="blob bg-pink-500 w-80 h-80 rounded-full top-1/3 right-40"></div>
+            <div class="blob bg-purple-500 w-64 h-64 rounded-full bottom-1/4 left-1/4"></div>
+        </div>
+        
+        <!-- Floating arrow down -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <a href="#services" class="text-white animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="stats-item">
+                    <div class="text-5xl font-bold mb-2 stats-counter" data-target="5000">0</div>
+                    <div class="text-gray-300 uppercase text-sm tracking-wider">Happy Clients</div>
+                </div>
+                <div class="stats-item">
+                    <div class="text-5xl font-bold mb-2 stats-counter" data-target="150">0</div>
+                    <div class="text-gray-300 uppercase text-sm tracking-wider">Countries Served</div>
+                </div>
+                <div class="stats-item">
+                    <div class="text-5xl font-bold mb-2 stats-counter" data-target="25000000">0</div>
+                    <div class="text-gray-300 uppercase text-sm tracking-wider">Monthly Traffic</div>
+                </div>
+                <div class="stats-item">
+                    <div class="text-5xl font-bold mb-2 stats-counter" data-target="24">0</div>
+                    <div class="text-gray-300 uppercase text-sm tracking-wider">Support Hours</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase text-indigo-600">Our Services</span>
+                <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Drive Targeted Traffic to Your Business</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">We offer a variety of traffic solutions to fit your specific needs and goals.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-globe text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Website Traffic</h3>
+                    <p class="text-gray-600 mb-4">High-quality visitors to your website from global sources. Geo-targeted options available.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> Real human visitors
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> Low bounce rates
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> Targeted demographics
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-pink-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-shopping-cart text-pink-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">E-Commerce Traffic</h3>
+                    <p class="text-gray-600 mb-4">Buyer-intent traffic focused on increasing conversions for online stores.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> Shopping-focused users
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> High conversion rates
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> Product category targeting
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Mobile App Traffic</h3>
+                    <p class="text-gray-600 mb-4">Drive downloads and users to your mobile applications across platforms.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> iOS & Android traffic
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> App store optimization
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i> Engagement-focused users
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section with Parallax -->
+    <section id="about" class="parallax py-32" style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl p-8 md:p-12 max-w-3xl shadow-xl">
+                <span class="text-sm font-semibold tracking-wider uppercase text-indigo-600">About Us</span>
+                <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">The Traffic Experts</h2>
+                <p class="mt-4 text-lg text-gray-600">Founded in 2015, House Traffic has established itself as a leader in digital marketing and traffic acquisition. Our team of data scientists, marketers and growth hackers work tirelessly to deliver the highest quality traffic to your business.</p>
+                <div class="mt-8 grid gap-8 md:grid-cols-2">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-indigo-100 rounded-lg p-2">
+                            <i class="fas fa-chart-line text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">Data-Driven Approach</h3>
+                            <p class="mt-1 text-gray-600">We analyze millions of data points to optimize traffic delivery.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-pink-100 rounded-lg p-2">
+                            <i class="fas fa-shield-alt text-pink-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">Fraud Prevention</h3>
+                            <p class="mt-1 text-gray-600">Sophisticated filters ensure only genuine, high-quality traffic.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-full font-medium hover:shadow-lg transition-all duration-300">Learn More About Our Process</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase text-indigo-600">Pricing</span>
+                <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Simple, Transparent Pricing</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Pay only for the traffic you need with no hidden fees.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="px-6 py-8">
+                        <h3 class="text-lg font-medium text-gray-900">Starter</h3>
+                        <div class="mt-4 flex items-baseline">
+                            <span class="text-5xl font-extrabold">$99</span>
+                            <span class="ml-1 text-xl font-medium text-gray-500">/month</span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-500">Perfect for small businesses getting started</p>
+                    </div>
+                    <div class="px-6 pt-6 pb-8 bg-gray-50">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">10,000 Monthly Visitors</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Basic Targeting</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Email Support</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <button class="w-full px-6 py-3 border border-gray-300 rounded-full font-medium hover:bg-gray-50 transition">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Popular Plan -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform scale-105 relative card-hover">
+                    <div class="absolute top-0 right-0 bg-indigo-600 text-white px-3 py-1 text-xs font-semibold tracking-wider rounded-bl-lg">MOST POPULAR</div>
+                    <div class="px-6 py-8">
+                        <h3 class="text-lg font-medium text-gray-900">Growth</h3>
+                        <div class="mt-4 flex items-baseline">
+                            <span class="text-5xl font-extrabold">$299</span>
+                            <span class="ml-1 text-xl font-medium text-gray-500">/month</span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-500">Ideal for growing businesses</p>
+                    </div>
+                    <div class="px-6 pt-6 pb-8 bg-gray-50">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">50,000 Monthly Visitors</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Advanced Targeting</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Priority Support</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Performance Reports</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <button class="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-full font-medium hover:shadow-lg transition">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="px-6 py-8">
+                        <h3 class="text-lg font-medium text-gray-900">Enterprise</h3>
+                        <div class="mt-4 flex items-baseline">
+                            <span class="text-5xl font-extrabold">$899</span>
+                            <span class="ml-1 text-xl font-medium text-gray-500">/month</span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-500">For high-volume needs</p>
+                    </div>
+                    <div class="px-6 pt-6 pb-8 bg-gray-50">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">200,000+ Visitors</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Premium Targeting</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">24/7 Support</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700">Custom Solutions</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <button class="w-full px-6 py-3 border border-gray-300 rounded-full font-medium hover:bg-gray-50 transition">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-500">Need custom traffic solutions? <a href="#contact" class="text-indigo-600 hover:text-indigo-800 font-medium">Contact us</a> for enterprise pricing.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase text-indigo-600">Client Success</span>
+                <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">What Our Clients Say</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Testimonial" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-600">E-Commerce Store Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Our sales increased by 75% within the first month of using House Traffic. The quality of visitors is outstanding compared to other providers we've tried."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonial" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Michael Chen</h4>
+                            <p class="text-sm text-gray-600">Startup Founder</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The targeted traffic we received helped us validate our product idea quickly. The ability to specify exact demographics was crucial for our testing phase."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Testimonial" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Jessica Williams</h4>
+                            <p class="text-sm text-gray-600">Marketing Director</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Unlike other traffic sources that felt like bots, House Traffic delivers real visitors who engage with our content and convert. Worth every penny!"</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section with Parallax -->
+    <section class="parallax py-32" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+        <div class="absolute inset-0 bg-indigo-900/80"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Grow Your Business?</h2>
+            <p class="text-xl text-gray-200 mb-10">High-quality targeted traffic is just a click away. Get started with House Traffic today and see the difference real visitors can make.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="px-8 py-4 bg-white text-indigo-600 rounded-full font-bold text-lg hover:bg-gray-100 transition">Contact Our Team</a>
+                <a href="#pricing" class="px-8 py-4 bg-white/10 text-white border-2 border-white/30 rounded-full font-bold text-lg backdrop-blur-md hover:bg-white/20 transition">View Pricing</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-sm font-semibold tracking-wider uppercase text-indigo-600">Contact Us</span>
+                    <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Get In Touch</h2>
+                    <p class="mt-4 text-lg text-gray-600">Have questions about our services? Our team is ready to help you find the perfect traffic solution for your business needs.</p>
+                    
+                    <div class="mt-10">
+                        <div class="flex items-start mb-8">
+                            <div class="flex-shrink-0 bg-indigo-100 rounded-lg p-3">
+                                <i class="fas fa-envelope text-indigo-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Email us</h3>
+                                <p class="mt-1 text-gray-600">info@housetraffic.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-8">
+                            <div class="flex-shrink-0 bg-pink-100 rounded-lg p-3">
+                                <i class="fas fa-phone-alt text-pink-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Call us</h3>
+                                <p class="mt-1 text-gray-600">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-purple-100 rounded-lg p-3">
+                                <i class="fas fa-map-marker-alt text-purple-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Visit us</h3>
+                                <p class="mt-1 text-gray-600">123 Business Ave, Suite 400<br>San Francisco, CA 94107</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Send us a message</h3>
+                    <form>
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        </div>
+                        <div class="mb-6">
+                            <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service Interest</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <option>Website Traffic</option>
+                                <option>E-Commerce Traffic</option>
+                                <option>Mobile App Traffic</option>
+                                <option>Not Sure - Need Advice</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-4 bg-gradient-to-r from-indigo-600 to-pink-500 text-white rounded-full font-bold hover:shadow-lg transition">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold gradient-text mb-6">House Traffic</h3>
+                    <p class="text-gray-400 text-sm">Premium traffic solutions for businesses of all sizes. Real visitors. Real results.</p>
+                    <div class="mt-6 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Website Traffic</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">E-Commerce Traffic</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mobile App Traffic</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Targeted Campaigns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Enterprise Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase mb-6">Company</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Case Studies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase mb-6">Legal</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 House Traffic. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="#" class="px-6 py-2 border border-transparent text-base font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Hide mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Stats counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stats-counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target.toLocaleString();
+                }
+            });
+        }
+        
+        // Only animate counters when scrolled to stats section
+        window.addEventListener('scroll', function() {
+            const statsSection = document.querySelector('.bg-gray-900');
+            const position = statsSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (position < screenPosition) {
+                animateCounters();
+                // Remove event listener after first trigger
+                window.removeEventListener('scroll', this);
+            }
+        });
+        
+        // Initialize counters to 0
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stats-counter');
+            counters.forEach(counter => {
+                counter.innerText = '0';
+            });
+        });
+        
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.add('shadow-sm');
+            }
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - <a href="https://enzostvs-deepsite.hf.space?remix=AVATARA1/test-1" style="color: #fff;text-decoration: underline;" target="_blank" >🧬 Remix</a></p></body>
 </html>
